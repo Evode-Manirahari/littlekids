@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { X, Play, Pause, Volume2, VolumeX, BookOpen, Eye, Headphones, Hand, FileText, Star, Clock, Users, Target } from 'lucide-react';
-import { Tutorial, getTutorialsByLearningStyle, getTutorialsByCategory, getTutorialsForLevel } from '../data/tutorials';
+import { X, Play, BookOpen, Eye, Headphones, Hand, FileText, Star, Clock } from 'lucide-react';
+import { Tutorial, getTutorialsForLevel } from '../data/tutorials';
 
 interface EnhancedTutorialModalProps {
   isOpen: boolean;
@@ -21,10 +21,7 @@ export const EnhancedTutorialModal: React.FC<EnhancedTutorialModalProps> = ({
   const [tutorials, setTutorials] = useState<Tutorial[]>([]);
   const [filter, setFilter] = useState<'all' | 'visual' | 'auditory' | 'kinesthetic' | 'reading'>('all');
   const [category, setCategory] = useState<'all' | 'beginner' | 'intermediate' | 'advanced' | 'concept' | 'project'>('all');
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [isMuted, setIsMuted] = useState(false);
+  // Removed unused state variables
   const [completedExercises, setCompletedExercises] = useState<string[]>([]);
 
   // Load tutorials based on level and learning style
@@ -51,17 +48,9 @@ export const EnhancedTutorialModal: React.FC<EnhancedTutorialModalProps> = ({
 
   const handleTutorialSelect = (tutorial: Tutorial) => {
     setSelectedTutorial(tutorial);
-    setIsPlaying(false);
-    setCurrentTime(0);
   };
 
-  const handlePlayPause = () => {
-    setIsPlaying(!isPlaying);
-  };
-
-  const handleMuteToggle = () => {
-    setIsMuted(!isMuted);
-  };
+  // Removed unused functions
 
   const handleExerciseComplete = (exercise: string) => {
     if (!completedExercises.includes(exercise)) {

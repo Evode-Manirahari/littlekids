@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { Move, Trash2, Plus, Code } from 'lucide-react';
+import { Move, Trash2, Code } from 'lucide-react';
 
 interface CodeBlock {
   id: string;
@@ -19,7 +19,7 @@ interface DragDropCodeEditorProps {
 
 export const DragDropCodeEditor: React.FC<DragDropCodeEditorProps> = ({
   onCodeChange,
-  initialCode = '',
+  // initialCode = '', // Removed unused parameter
   className = ''
 }) => {
   const [blocks, setBlocks] = useState<CodeBlock[]>([]);
@@ -47,11 +47,11 @@ export const DragDropCodeEditor: React.FC<DragDropCodeEditorProps> = ({
   }, []);
 
   // Handle block creation
-  const handleCreateBlock = (type: CodeBlock['type']) => {
+  const handleCreateBlock = (type: string) => {
     const template = availableBlocks.find(b => b.type === type)?.template || '';
     const newBlock: CodeBlock = {
       id: Date.now().toString(),
-      type,
+      type: type as CodeBlock['type'],
       content: template,
       x: 50 + (blocks.length * 20),
       y: 50 + (blocks.length * 20),

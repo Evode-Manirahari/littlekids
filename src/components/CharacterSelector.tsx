@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Robot, Cat, Dragon, Check } from 'lucide-react';
+import { Bot, Check } from 'lucide-react';
 import { AnimatedCharacter } from './AnimatedCharacter';
 
 interface CharacterSelectorProps {
@@ -20,21 +20,21 @@ export const CharacterSelector: React.FC<CharacterSelectorProps> = ({
       id: 'robot' as const,
       name: 'Robo',
       description: 'A friendly robot who loves coding!',
-      icon: Robot,
+      icon: Bot,
       color: '#4f46e5'
     },
     {
       id: 'cat' as const,
       name: 'Whiskers',
       description: 'A curious cat who loves puzzles!',
-      icon: Cat,
+      icon: Bot,
       color: '#f59e0b'
     },
     {
       id: 'dragon' as const,
       name: 'Sparky',
       description: 'A magical dragon who breathes code!',
-      icon: Dragon,
+      icon: Bot,
       color: '#ef4444'
     }
   ];

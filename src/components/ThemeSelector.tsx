@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Palette, Check, Eye } from 'lucide-react';
-import { themes, Theme } from '../data/themes';
+import { themes } from '../data/themes';
 
 interface ThemeSelectorProps {
   currentTheme: string;

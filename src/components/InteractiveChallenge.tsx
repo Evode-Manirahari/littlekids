@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CheckCircle, XCircle, Lightbulb, Target, Trophy, Clock, RotateCcw } from 'lucide-react';
+import { CheckCircle, Lightbulb, Target, Trophy, Clock, RotateCcw } from 'lucide-react';
 
 interface ChallengeStep {
   id: string;

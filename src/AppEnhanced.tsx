@@ -5,10 +5,7 @@ import { LevelSelect } from './components/LevelSelect';
 import { WelcomeScreen } from './components/WelcomeScreen';
 import { AuthModal } from './components/AuthModal';
 import { TeacherDashboard } from './components/TeacherDashboard';
-import { ThemeToggle } from './components/ThemeToggle';
-import { ThemeSelector } from './components/ThemeSelector';
-import { SoundToggle } from './components/SoundToggle';
-import { MusicToggle } from './components/MusicToggle';
+// Removed unused imports
 import { LocalAuthProvider, useLocalAuth } from './contexts/LocalAuthContext';
 import { LocalProgressService } from './services/localProgressService';
 import { soundService } from './services/soundService';

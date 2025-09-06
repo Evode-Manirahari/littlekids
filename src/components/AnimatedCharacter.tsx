@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Robot, Cat, Dragon, Star, Zap, Heart } from 'lucide-react';
+import { Star, Zap, Heart } from 'lucide-react';
 
 interface AnimatedCharacterProps {
   type: 'robot' | 'cat' | 'dragon';
@@ -117,7 +117,7 @@ export const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
       </div>
       {getSpecialEffects()}
       
-      <style jsx>{`
+      <style>{`
         .animated-character {
           position: relative;
           display: inline-block;
