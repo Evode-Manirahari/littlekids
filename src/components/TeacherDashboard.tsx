@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Users, BookOpen, Trophy, Clock, AlertCircle } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+import { useLocalAuth } from '../contexts/LocalAuthContext';
 import { ProgressService } from '../services/progressService';
 import { supabase } from '../lib/supabase';
 
@@ -23,7 +23,7 @@ interface ClassroomData {
 }
 
 export const TeacherDashboard: React.FC = () => {
-  const { user } = useAuth();
+  const { user } = useLocalAuth();
   const [classrooms, setClassrooms] = useState<ClassroomData[]>([]);
   const [selectedClassroom, setSelectedClassroom] = useState<string | null>(null);
   const [studentProgress, setStudentProgress] = useState<StudentProgress[]>([]);

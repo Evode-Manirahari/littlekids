@@ -5,13 +5,13 @@ import { LevelSelect } from './components/LevelSelect';
 import { WelcomeScreen } from './components/WelcomeScreen';
 import { AuthModal } from './components/AuthModal';
 import { TeacherDashboard } from './components/TeacherDashboard';
-import { AuthProvider, useAuth } from './contexts/AuthContext';
-import { ProgressService } from './services/progressService';
+import { LocalAuthProvider, useLocalAuth } from './contexts/LocalAuthContext';
+import { LocalProgressService } from './services/localProgressService';
 import type { GameProgress } from './types';
 
 // Main App Router Component
 function AppRouter() {
-  const { user, profile, loading } = useAuth();
+  const { user, profile, loading } = useLocalAuth();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
 
@@ -63,7 +63,7 @@ function AppRouter() {
 
 // Game Application Component (for authenticated users)
 function GameApp() {
-  const { user } = useAuth();
+  const { user } = useLocalAuth();
   const [currentScreen, setCurrentScreen] = useState<'levelSelect' | 'game'>('levelSelect');
   const [currentLevelId, setCurrentLevelId] = useState<string>('');
   const [progress, setProgress] = useState<GameProgress>({
@@ -72,7 +72,7 @@ function GameApp() {
     currentLevel: 'level1',
     hintsUsed: {}
   });
-  const [progressService] = useState(() => user ? new ProgressService(user.id) : null);
+  const [progressService] = useState(() => user ? new LocalProgressService(user.id) : null);
 
   // Load progress from cloud on mount
   useEffect(() => {
@@ -168,9 +168,9 @@ function GameApp() {
 // Main App Component with Auth Provider
 function App() {
   return (
-    <AuthProvider>
+    <LocalAuthProvider>
       <AppRouter />
-    </AuthProvider>
+    </LocalAuthProvider>
   );
 }
 

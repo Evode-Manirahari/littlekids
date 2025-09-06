@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, Mail, Lock, User, GraduationCap, Users, Heart } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+import { useLocalAuth } from '../contexts/LocalAuthContext';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -10,7 +10,7 @@ interface AuthModalProps {
 }
 
 export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, mode, onModeChange }) => {
-  const { signIn, signUp } = useAuth();
+  const { signIn, signUp } = useLocalAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Play, Trophy, Code, Star, User, LogOut } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+import { useLocalAuth } from '../contexts/LocalAuthContext';
 
 interface WelcomeScreenProps {
   onStart: () => void;
@@ -10,7 +10,7 @@ interface WelcomeScreenProps {
 }
 
 export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onTeacherDashboard, user, profile }) => {
-  const { signOut } = useAuth();
+  const { signOut } = useLocalAuth();
 
   return (
     <div className="welcome-screen">

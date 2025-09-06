@@ -6,7 +6,7 @@ import { GridView } from './GridView';
 import { HintSystem } from './HintSystem';
 import { levels } from '../data/levels';
 import { pyodideEngine } from '../engine/pyodideEngine';
-import { ProgressService } from '../services/progressService';
+import { LocalProgressService } from '../services/localProgressService';
 import type { GameProgress, CodeExecutionResult, HintState } from '../types';
 
 interface GameScreenProps {
@@ -14,7 +14,7 @@ interface GameScreenProps {
   progress: GameProgress;
   onComplete: (levelId: string, stars: number, hintsUsed: number) => void;
   onBack: () => void;
-  progressService?: ProgressService | null;
+  progressService?: LocalProgressService | null;
 }
 
 export const GameScreen: React.FC<GameScreenProps> = ({ 
