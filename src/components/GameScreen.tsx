@@ -69,11 +69,10 @@ export const GameScreen: React.FC<GameScreenProps> = ({
         );
       }
       
-      if (result.success && result.stars && result.stars >= 3) {
-        // Level completed with 3 stars
-        setTimeout(() => {
-          onComplete(levelId, result.stars!, hintState.currentHint);
-        }, 2000);
+      if (result.success && result.stars && result.stars > 0) {
+        // Level completed with any stars - show success message
+        const starText = result.stars > 1 ? 's' : '';
+        setConsoleOutput(prev => prev + `\n🎉 Great job! You earned ${result.stars} star${starText}! 🎉`);
       }
     } catch (error) {
       const executionTime = Date.now() - startTime;
@@ -166,6 +165,15 @@ export const GameScreen: React.FC<GameScreenProps> = ({
                   <Play className="btn-icon" />
                   {isRunning ? 'Running...' : 'Run Code'}
                 </button>
+                
+                {executionResult?.success && executionResult?.stars && executionResult.stars > 0 && (
+                  <button 
+                    className="btn btn-success"
+                    onClick={() => onComplete(levelId, executionResult.stars!, hintState.currentHint)}
+                  >
+                    🎉 Next Level! 🎉
+                  </button>
+                )}
               </div>
             </div>
             
@@ -183,6 +191,14 @@ export const GameScreen: React.FC<GameScreenProps> = ({
               testResults={executionResult?.testResults}
               stars={stars}
             />
+            
+            {executionResult?.success && executionResult?.stars && executionResult.stars > 0 && (
+              <div className="completion-message">
+                <h4>🎉 Level Completed! 🎉</h4>
+                <p>You earned {executionResult.stars} star{executionResult.stars > 1 ? 's' : ''}!</p>
+                <p>Click "Next Level!" to continue your adventure!</p>
+              </div>
+            )}
           </div>
         </div>
 
@@ -331,6 +347,26 @@ export const GameScreen: React.FC<GameScreenProps> = ({
           font-weight: bold;
           color: white;
           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .completion-message {
+          background: linear-gradient(135deg, #06ffa5, #00d4aa);
+          color: white;
+          padding: 20px;
+          border-radius: 15px;
+          margin-top: 15px;
+          text-align: center;
+          animation: bounce 0.5s ease-out;
+        }
+
+        .completion-message h4 {
+          margin: 0 0 10px 0;
+          font-size: 1.3rem;
+        }
+
+        .completion-message p {
+          margin: 5px 0;
+          font-size: 1rem;
         }
 
         @media (max-width: 1024px) {
