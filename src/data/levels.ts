@@ -30,7 +30,14 @@ print("Hello, " + name + "!")`,
     hints: [
       'Variables store information. Try: name = "Your Name"',
       'Use print() to display text: print("Hello, " + name)'
-    ]
+    ],
+    videoTutorial: 'https://www.youtube.com/watch?v=uzyiCpsS0qQ&list=PLnb0FwCbM-50UuNjpeIrdEnlSbbMK891Q',
+    additionalTutorials: [
+      'https://www.youtube.com/watch?v=bdUqQidffPE'
+    ],
+    codeWalkthrough: 'Step 1: Create a variable to store a name\nStep 2: Use print() to display a greeting\nStep 3: Combine the variable with text using +',
+    whyThisWorks: 'Variables are like labeled boxes that store information. The print() function displays text on the screen. When you combine text with variables using +, Python creates a new string.',
+    conceptGlossary: ['Variable', 'String', 'Print function']
   },
   
   {
@@ -78,7 +85,14 @@ print(f"🎯 It took {result} rolls to get a 6!")`,
     hints: [
       'Use "while True:" to create a loop that runs forever',
       'Inside the loop, call roller() and check if the result is 6. If it is, use "return" to stop the loop'
-    ]
+    ],
+    videoTutorial: 'https://www.youtube.com/watch?v=uzyiCpsS0qQ&list=PLnb0FwCbM-50UuNjpeIrdEnlSbbMK891Q',
+    additionalTutorials: [
+      'https://www.youtube.com/watch?v=bdUqQidffPE'
+    ],
+    codeWalkthrough: 'Step 1: Create a while loop that runs forever\nStep 2: Call roller() to get a random number\nStep 3: Check if the number is 6\nStep 4: If yes, return the count; if no, add 1 to count and continue',
+    whyThisWorks: 'While loops keep running until a condition is met. The roller() function gives you random numbers, and you count how many times you need to call it to get a 6.',
+    conceptGlossary: ['While loop', 'Random numbers', 'Counters', 'Return statement']
   },
   
   {
@@ -127,6 +141,13 @@ else:
       'Check if world.at(x+1, y)["type"] == "empty" before moving right',
       'Use if/elif statements to check different directions and tile types'
     ],
+    videoTutorial: 'https://www.youtube.com/watch?v=uzyiCpsS0qQ&list=PLnb0FwCbM-50UuNjpeIrdEnlSbbMK891Q',
+    additionalTutorials: [
+      'https://www.youtube.com/watch?v=bdUqQidffPE'
+    ],
+    codeWalkthrough: 'Step 1: Get the starting position from world.start\nStep 2: Check what type of tile is at each position\nStep 3: Use if statements to avoid walls and lava\nStep 4: Move towards the goal tile',
+    whyThisWorks: 'Conditionals (if/elif/else) let you make decisions in your code. You check the tile type and decide whether it\'s safe to move there.',
+    conceptGlossary: ['If statements', 'Conditionals', 'Grid navigation', 'Tile types'],
     world: {
       width: 5,
       height: 5,

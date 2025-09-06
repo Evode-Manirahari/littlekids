@@ -12,6 +12,11 @@ export interface Level {
   parTime?: number;
   world?: GridWorld;
   diceConfig?: DiceConfig;
+  videoTutorial?: string;
+  additionalTutorials?: string[];
+  codeWalkthrough?: string;
+  whyThisWorks?: string;
+  conceptGlossary?: string[];
 }
 
 export interface TestCase {
@@ -68,4 +73,63 @@ export interface HintState {
   currentHint: number;
   maxHints: number;
   hints: string[];
+}
+
+export interface GameProgressEnhanced {
+  currentLevel: string;
+  completedLevels: string[];
+  stars: Record<string, number>;
+  totalStars: number;
+  achievements: string[];
+  streak: number;
+  lastPlayed: string;
+  avatar: string;
+  theme: 'light' | 'dark';
+  soundEnabled: boolean;
+  musicEnabled: boolean;
+  hintsUsed: { [levelId: string]: number };
+}
+
+export interface User {
+  id: string;
+  email: string;
+  name: string;
+  role: 'student' | 'teacher' | 'parent';
+  avatar: string;
+  theme: 'light' | 'dark';
+  soundEnabled: boolean;
+  musicEnabled: boolean;
+  createdAt: string;
+}
+
+export interface Achievement {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  unlocked: boolean;
+  unlockedAt?: string;
+}
+
+export interface CodeSnippet {
+  id: string;
+  title: string;
+  description: string;
+  code: string;
+  category: string;
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
+}
+
+export interface ConceptGlossary {
+  term: string;
+  definition: string;
+  example: string;
+  category: string;
+}
+
+export interface ErrorTranslation {
+  errorType: string;
+  kidFriendlyMessage: string;
+  suggestion: string;
+  example: string;
 }

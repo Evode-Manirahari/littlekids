@@ -7,6 +7,10 @@ interface WelcomeScreenProps {
   onTeacherDashboard: () => void;
   user: any;
   profile: any;
+  theme?: 'light' | 'dark';
+  onThemeToggle?: () => void;
+  soundEnabled?: boolean;
+  onSoundToggle?: () => void;
 }
 
 export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onTeacherDashboard, user, profile }) => {

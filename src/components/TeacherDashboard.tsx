@@ -22,7 +22,14 @@ interface ClassroomData {
   created_at: string;
 }
 
-export const TeacherDashboard: React.FC = () => {
+interface TeacherDashboardProps {
+  theme?: 'light' | 'dark';
+  onThemeToggle?: () => void;
+  soundEnabled?: boolean;
+  onSoundToggle?: () => void;
+}
+
+export const TeacherDashboard: React.FC<TeacherDashboardProps> = () => {
   const { user } = useLocalAuth();
   const [classrooms, setClassrooms] = useState<ClassroomData[]>([]);
   const [selectedClassroom, setSelectedClassroom] = useState<string | null>(null);
