@@ -5,6 +5,12 @@ interface User {
   email: string;
   full_name: string;
   role: 'student' | 'teacher' | 'parent';
+  character: 'robot' | 'cat' | 'dragon';
+  avatar: string;
+  theme: 'light' | 'dark';
+  soundEnabled: boolean;
+  musicEnabled: boolean;
+  createdAt: string;
 }
 
 interface LocalAuthContextType {
@@ -12,7 +18,7 @@ interface LocalAuthContextType {
   profile: User | null;
   session: any;
   loading: boolean;
-  signUp: (email: string, password: string, fullName: string, role: 'student' | 'teacher' | 'parent') => Promise<void>;
+  signUp: (email: string, password: string, fullName: string, role: 'student' | 'teacher' | 'parent', character?: 'robot' | 'cat' | 'dragon') => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
   updateProfile: (updates: Partial<User>) => Promise<void>;
@@ -50,7 +56,7 @@ export const LocalAuthProvider: React.FC<LocalAuthProviderProps> = ({ children }
     setLoading(false);
   }, []);
 
-  const signUp = async (email: string, _password: string, fullName: string, role: 'student' | 'teacher' | 'parent') => {
+  const signUp = async (email: string, _password: string, fullName: string, role: 'student' | 'teacher' | 'parent', character: 'robot' | 'cat' | 'dragon' = 'robot') => {
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 1000));
     
@@ -65,7 +71,13 @@ export const LocalAuthProvider: React.FC<LocalAuthProviderProps> = ({ children }
       id: Date.now().toString(),
       email,
       full_name: fullName,
-      role
+      role,
+      character,
+      avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`,
+      theme: 'light',
+      soundEnabled: true,
+      musicEnabled: true,
+      createdAt: new Date().toISOString()
     };
 
     // Save to localStorage

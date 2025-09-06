@@ -96,6 +96,7 @@ export interface User {
   name: string;
   role: 'student' | 'teacher' | 'parent';
   avatar: string;
+  character: 'robot' | 'cat' | 'dragon';
   theme: 'light' | 'dark';
   soundEnabled: boolean;
   musicEnabled: boolean;

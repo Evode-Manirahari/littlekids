@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, Mail, Lock, User, GraduationCap, Users, Heart } from 'lucide-react';
 import { useLocalAuth } from '../contexts/LocalAuthContext';
+import { CharacterSelector } from './CharacterSelector';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -15,6 +16,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, mode, onM
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
   const [role, setRole] = useState<'student' | 'teacher' | 'parent'>('student');
+  const [character, setCharacter] = useState<'robot' | 'cat' | 'dragon'>('robot');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -27,7 +29,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, mode, onM
       if (mode === 'signin') {
         await signIn(email, password);
       } else {
-        await signUp(email, password, fullName, role);
+        await signUp(email, password, fullName, role, character);
       }
       onClose();
     } catch (err: any) {
@@ -107,6 +109,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, mode, onM
                     <small>Supporting my child</small>
                   </button>
                 </div>
+              </div>
+              
+              <div className="form-group">
+                <CharacterSelector
+                  selectedCharacter={character}
+                  onCharacterChange={setCharacter}
+                />
               </div>
             </>
           )}

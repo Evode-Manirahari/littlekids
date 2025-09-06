@@ -1,6 +1,10 @@
 import React from 'react';
 import { Play, Trophy, Code, Star, User, LogOut } from 'lucide-react';
 import { useLocalAuth } from '../contexts/LocalAuthContext';
+import { ThemeToggle } from './ThemeToggle';
+import { ThemeSelector } from './ThemeSelector';
+import { SoundToggle } from './SoundToggle';
+import { MusicToggle } from './MusicToggle';
 
 interface WelcomeScreenProps {
   onStart: () => void;
@@ -9,11 +13,28 @@ interface WelcomeScreenProps {
   profile: any;
   theme?: 'light' | 'dark';
   onThemeToggle?: () => void;
+  themeId?: string;
+  onThemeChange?: (themeId: string) => void;
   soundEnabled?: boolean;
   onSoundToggle?: () => void;
+  musicEnabled?: boolean;
+  onMusicToggle?: () => void;
 }
 
-export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onTeacherDashboard, user, profile }) => {
+export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ 
+  onStart, 
+  onTeacherDashboard, 
+  user, 
+  profile,
+  theme,
+  onThemeToggle,
+  themeId,
+  onThemeChange,
+  soundEnabled,
+  onSoundToggle,
+  musicEnabled,
+  onMusicToggle
+}) => {
   const { signOut } = useLocalAuth();
 
   return (
@@ -86,6 +107,23 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onTeacher
               Reset Progress
             </button>
           )}
+        </div>
+
+        {/* Controls */}
+        <div className="welcome-controls">
+          <ThemeToggle theme={theme || 'light'} onToggle={onThemeToggle || (() => {})} />
+          <ThemeSelector 
+            currentTheme={themeId || 'ocean'} 
+            onThemeChange={onThemeChange || (() => {})} 
+          />
+          <SoundToggle 
+            soundEnabled={soundEnabled || true} 
+            onToggle={onSoundToggle || (() => {})} 
+          />
+          <MusicToggle 
+            musicEnabled={musicEnabled || true} 
+            onMusicToggle={onMusicToggle || (() => {})} 
+          />
         </div>
 
         <div className="welcome-footer">
@@ -229,6 +267,19 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onTeacher
         .btn-icon {
           width: 20px;
           height: 20px;
+        }
+
+        .welcome-controls {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px;
+          justify-content: center;
+          margin: 30px 0;
+          padding: 20px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 16px;
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .welcome-footer {

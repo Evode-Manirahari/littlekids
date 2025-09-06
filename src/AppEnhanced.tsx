@@ -5,6 +5,10 @@ import { LevelSelect } from './components/LevelSelect';
 import { WelcomeScreen } from './components/WelcomeScreen';
 import { AuthModal } from './components/AuthModal';
 import { TeacherDashboard } from './components/TeacherDashboard';
+import { ThemeToggle } from './components/ThemeToggle';
+import { ThemeSelector } from './components/ThemeSelector';
+import { SoundToggle } from './components/SoundToggle';
+import { MusicToggle } from './components/MusicToggle';
 import { LocalAuthProvider, useLocalAuth } from './contexts/LocalAuthContext';
 import { LocalProgressService } from './services/localProgressService';
 import { soundService } from './services/soundService';
@@ -16,15 +20,21 @@ function AppRouter() {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [themeId, setThemeId] = useState<string>('ocean');
   const [soundEnabled, setSoundEnabled] = useState(true);
+  const [musicEnabled, setMusicEnabled] = useState(true);
   const navigate = useNavigate();
 
   // Load user preferences
   useEffect(() => {
     const savedTheme = localStorage.getItem('codequest-theme') as 'light' | 'dark' || 'light';
+    const savedThemeId = localStorage.getItem('codequest-theme-id') || 'ocean';
     const savedSound = localStorage.getItem('codequest-sound') === 'true';
+    const savedMusic = localStorage.getItem('codequest-music') === 'true';
     setTheme(savedTheme);
+    setThemeId(savedThemeId);
     setSoundEnabled(savedSound);
+    setMusicEnabled(savedMusic);
   }, []);
 
   // Apply theme to document
@@ -43,6 +53,17 @@ function AppRouter() {
     setSoundEnabled(newSoundEnabled);
     localStorage.setItem('codequest-sound', newSoundEnabled.toString());
     soundService.setSoundEnabled(newSoundEnabled);
+  };
+
+  const handleMusicToggle = () => {
+    const newMusicEnabled = !musicEnabled;
+    setMusicEnabled(newMusicEnabled);
+    localStorage.setItem('codequest-music', newMusicEnabled.toString());
+  };
+
+  const handleThemeChange = (newThemeId: string) => {
+    setThemeId(newThemeId);
+    localStorage.setItem('codequest-theme-id', newThemeId);
   };
 
   if (loading) {
@@ -69,13 +90,17 @@ function AppRouter() {
                   setShowAuthModal(true);
                 }
               }}
+              theme={theme}
+              onThemeToggle={handleThemeToggle}
+              themeId={themeId}
+              onThemeChange={handleThemeChange}
+              soundEnabled={soundEnabled}
+              onSoundToggle={handleSoundToggle}
+              musicEnabled={musicEnabled}
+              onMusicToggle={handleMusicToggle}
               onTeacherDashboard={() => navigate('/teacher')}
               user={user}
               profile={profile}
-              theme={theme}
-              onThemeToggle={handleThemeToggle}
-              soundEnabled={soundEnabled}
-              onSoundToggle={handleSoundToggle}
             />
           } />
           
@@ -85,6 +110,8 @@ function AppRouter() {
               onThemeToggle={handleThemeToggle}
               soundEnabled={soundEnabled}
               onSoundToggle={handleSoundToggle}
+              musicEnabled={musicEnabled}
+              onMusicToggle={handleMusicToggle}
             /> : <Navigate to="/" replace />
           } />
           
@@ -117,12 +144,16 @@ function GameApp({
   theme, 
   onThemeToggle, 
   soundEnabled, 
-  onSoundToggle 
+  onSoundToggle,
+  musicEnabled,
+  onMusicToggle
 }: { 
   theme: 'light' | 'dark';
   onThemeToggle: () => void;
   soundEnabled: boolean;
   onSoundToggle: () => void;
+  musicEnabled: boolean;
+  onMusicToggle: () => void;
 }) {
   const { user } = useLocalAuth();
   const navigate = useNavigate();
@@ -255,6 +286,8 @@ function GameApp({
           onThemeToggle={onThemeToggle}
           soundEnabled={soundEnabled}
           onSoundToggle={onSoundToggle}
+          musicEnabled={musicEnabled}
+          onMusicToggle={onMusicToggle}
         />
       )}
     </>

@@ -934,5 +934,758 @@ adventure_game()
       'This is your final project! Be creative!',
       'Try adding more features like inventory, combat, or multiple locations'
     ]
+  },
+
+  // ADVANCED LEVELS (17-25)
+  {
+    id: 'level17',
+    title: 'Turtle Graphics Art',
+    description: 'Create beautiful art using Python turtle graphics',
+    difficulty: 4,
+    category: 'project',
+    starterCode: `# Create beautiful art with Python turtle graphics!
+# Turtle graphics let you draw with a virtual pen
+
+import turtle
+
+def draw_flower():
+    # TODO: Create a beautiful flower using turtle graphics
+    # Use turtle.forward(), turtle.right(), turtle.left()
+    # Try different colors with turtle.color()
+    
+    # Example: Draw a simple square
+    for i in range(4):
+        turtle.forward(100)
+        turtle.right(90)
+    
+    turtle.done()
+
+# Start drawing
+draw_flower()
+`,
+    instructions: 'Create beautiful art using turtle graphics. Draw shapes, patterns, or even a flower!',
+    tests: [
+      {
+        name: 'Uses turtle graphics',
+        input: null,
+        expected: true,
+        description: 'Your code should use turtle graphics functions'
+      },
+      {
+        name: 'Creates visual output',
+        input: null,
+        expected: true,
+        description: 'The code should create a visual drawing'
+      }
+    ],
+    hints: [
+      'Use turtle.forward(distance) to move forward',
+      'Use turtle.right(angle) or turtle.left(angle) to turn',
+      'Use turtle.color("red") to change colors'
+    ],
+    videoTutorial: 'https://www.youtube.com/watch?v=uzyiCpsS0qQ&list=PLnb0FwCbM-50UuNjpeIrdEnlSbbMK891Q',
+    additionalTutorials: [
+      'https://www.youtube.com/watch?v=bdUqQidffPE'
+    ],
+    codeWalkthrough: 'Step 1: Import the turtle module\nStep 2: Use turtle.forward() to draw lines\nStep 3: Use turtle.right() or turtle.left() to turn\nStep 4: Use turtle.color() to add colors\nStep 5: Create loops to draw patterns',
+    whyThisWorks: 'Turtle graphics is a fun way to learn programming by drawing. You control a virtual turtle that moves around and draws lines, creating beautiful art!',
+    conceptGlossary: ['Turtle graphics', 'Drawing', 'Loops', 'Colors', 'Angles']
+  },
+
+  {
+    id: 'level18',
+    title: 'Data Analysis Adventure',
+    description: 'Analyze data like a real data scientist',
+    difficulty: 5,
+    category: 'project',
+    starterCode: `# Analyze student test scores like a data scientist!
+# Work with real data and find interesting patterns
+
+def analyze_scores(scores):
+    # TODO: Analyze the test scores
+    # Find: average, highest, lowest, and how many passed (>=70)
+    
+    total = sum(scores)
+    count = len(scores)
+    average = total / count if count > 0 else 0
+    
+    highest = max(scores) if scores else 0
+    lowest = min(scores) if scores else 0
+    
+    passed = sum(1 for score in scores if score >= 70)
+    
+    print(f"📊 Test Score Analysis:")
+    print(f"Average: {average:.1f}")
+    print(f"Highest: {highest}")
+    print(f"Lowest: {lowest}")
+    print(f"Students who passed: {passed}/{count}")
+    
+    return {
+        'average': average,
+        'highest': highest,
+        'lowest': lowest,
+        'passed': passed
+    }
+
+# Test with sample data
+test_scores = [85, 92, 78, 96, 88, 73, 91, 67, 89, 94]
+result = analyze_scores(test_scores)
+`,
+    instructions: 'Create a data analysis function that finds the average, highest, lowest scores, and counts how many students passed (70+).',
+    tests: [
+      {
+        name: 'Calculates average correctly',
+        input: null,
+        expected: true,
+        description: 'The function should calculate the average score'
+      },
+      {
+        name: 'Finds highest and lowest',
+        input: null,
+        expected: true,
+        description: 'The function should find the highest and lowest scores'
+      },
+      {
+        name: 'Counts passing students',
+        input: null,
+        expected: true,
+        description: 'The function should count students who scored 70 or higher'
+      }
+    ],
+    hints: [
+      'Use sum() to add all scores and len() to count them',
+      'Use max() and min() to find highest and lowest',
+      'Use a list comprehension to count passing scores'
+    ],
+    videoTutorial: 'https://www.youtube.com/watch?v=uzyiCpsS0qQ&list=PLnb0FwCbM-50UuNjpeIrdEnlSbbMK891Q',
+    additionalTutorials: [
+      'https://www.youtube.com/watch?v=bdUqQidffPE'
+    ],
+    codeWalkthrough: 'Step 1: Calculate the total and count of scores\nStep 2: Find the average by dividing total by count\nStep 3: Use max() and min() for highest and lowest\nStep 4: Count scores >= 70 using a list comprehension\nStep 5: Display the results in a nice format',
+    whyThisWorks: 'Data analysis helps us understand information better. By calculating averages, finding extremes, and counting categories, we can make informed decisions!',
+    conceptGlossary: ['Data analysis', 'Statistics', 'List comprehension', 'Functions', 'Data science']
+  },
+
+  {
+    id: 'level19',
+    title: 'Web Scraping Explorer',
+    description: 'Learn to extract information from websites',
+    difficulty: 5,
+    category: 'project',
+    starterCode: `# Learn web scraping basics!
+# Extract information from web pages (simulated)
+
+def extract_weather_info(weather_data):
+    # TODO: Extract temperature and condition from weather data
+    # The data comes as a string like "Temperature: 72°F, Condition: Sunny"
+    
+    # Split the data and extract information
+    parts = weather_data.split(', ')
+    temperature = None
+    condition = None
+    
+    for part in parts:
+        if 'Temperature:' in part:
+            temperature = part.split(': ')[1]
+        elif 'Condition:' in part:
+            condition = part.split(': ')[1]
+    
+    print(f"🌤️ Weather Report:")
+    print(f"Temperature: {temperature}")
+    print(f"Condition: {condition}")
+    
+    return {
+        'temperature': temperature,
+        'condition': condition
+    }
+
+# Test with sample weather data
+weather = "Temperature: 72°F, Condition: Sunny"
+result = extract_weather_info(weather)
+`,
+    instructions: 'Create a function that extracts temperature and weather condition from a weather data string.',
+    tests: [
+      {
+        name: 'Extracts temperature',
+        input: null,
+        expected: true,
+        description: 'The function should extract the temperature value'
+      },
+      {
+        name: 'Extracts condition',
+        input: null,
+        expected: true,
+        description: 'The function should extract the weather condition'
+      },
+      {
+        name: 'Handles different formats',
+        input: null,
+        expected: true,
+        description: 'The function should work with different data formats'
+      }
+    ],
+    hints: [
+      'Use split() to separate the data by commas',
+      'Use if statements to check for "Temperature:" and "Condition:"',
+      'Use split(": ") to separate the label from the value'
+    ],
+    videoTutorial: 'https://www.youtube.com/watch?v=uzyiCpsS0qQ&list=PLnb0FwCbM-50UuNjpeIrdEnlSbbMK891Q',
+    additionalTutorials: [
+      'https://www.youtube.com/watch?v=bdUqQidffPE'
+    ],
+    codeWalkthrough: 'Step 1: Split the weather data by commas\nStep 2: Loop through each part\nStep 3: Check if each part contains "Temperature:" or "Condition:"\nStep 4: Extract the value after the colon\nStep 5: Return the extracted information',
+    whyThisWorks: 'Web scraping helps us automatically extract useful information from websites. This is how many apps get real-time data like weather, news, or prices!',
+    conceptGlossary: ['Web scraping', 'Data extraction', 'String manipulation', 'Parsing', 'Automation']
+  },
+
+  {
+    id: 'level20',
+    title: 'Machine Learning Basics',
+    description: 'Build your first simple AI model',
+    difficulty: 5,
+    category: 'project',
+    starterCode: `# Create a simple machine learning model!
+# Predict if a student will pass based on study hours
+
+def predict_pass(study_hours, assignment_score):
+    # TODO: Create a simple prediction model
+    # If study_hours >= 5 AND assignment_score >= 80, predict "PASS"
+    # Otherwise, predict "NEED MORE WORK"
+    
+    if study_hours >= 5 and assignment_score >= 80:
+        prediction = "PASS"
+        confidence = "High"
+    elif study_hours >= 3 and assignment_score >= 70:
+        prediction = "PASS"
+        confidence = "Medium"
+    else:
+        prediction = "NEED MORE WORK"
+        confidence = "High"
+    
+    print(f"🤖 AI Prediction:")
+    print(f"Study Hours: {study_hours}")
+    print(f"Assignment Score: {assignment_score}")
+    print(f"Prediction: {prediction}")
+    print(f"Confidence: {confidence}")
+    
+    return prediction
+
+# Test the model
+predict_pass(6, 85)  # Should predict PASS
+predict_pass(2, 60)  # Should predict NEED MORE WORK
+`,
+    instructions: 'Create a simple machine learning model that predicts if a student will pass based on study hours and assignment scores.',
+    tests: [
+      {
+        name: 'Predicts correctly for high scores',
+        input: null,
+        expected: true,
+        description: 'The model should predict PASS for good study habits and scores'
+      },
+      {
+        name: 'Predicts correctly for low scores',
+        input: null,
+        expected: true,
+        description: 'The model should predict NEED MORE WORK for poor study habits'
+      },
+      {
+        name: 'Uses logical conditions',
+        input: null,
+        expected: true,
+        description: 'The model should use if/elif/else statements properly'
+      }
+    ],
+    hints: [
+      'Use if/elif/else to create decision rules',
+      'Check both study_hours AND assignment_score conditions',
+      'Create different confidence levels based on the conditions'
+    ],
+    videoTutorial: 'https://www.youtube.com/watch?v=uzyiCpsS0qQ&list=PLnb0FwCbM-50UuNjpeIrdEnlSbbMK891Q',
+    additionalTutorials: [
+      'https://www.youtube.com/watch?v=bdUqQidffPE'
+    ],
+    codeWalkthrough: 'Step 1: Define the prediction rules using if/elif/else\nStep 2: Check if both study hours and assignment score meet the criteria\nStep 3: Assign confidence levels based on how well the criteria are met\nStep 4: Display the prediction with reasoning\nStep 5: Test the model with different inputs',
+    whyThisWorks: 'Machine learning is about creating rules that can make predictions. Even simple rules can be very useful for making decisions based on data!',
+    conceptGlossary: ['Machine learning', 'Prediction', 'Decision rules', 'AI', 'Data patterns']
+  },
+
+  {
+    id: 'level21',
+    title: 'Game Development',
+    description: 'Create your own mini-game using Python',
+    difficulty: 5,
+    category: 'project',
+    starterCode: `# Create a simple number guessing game!
+# This is like a mini version of popular games
+
+import random
+
+def number_guessing_game():
+    print("🎮 Welcome to the Number Guessing Game!")
+    print("I'm thinking of a number between 1 and 100...")
+    
+    secret_number = random.randint(1, 100)
+    attempts = 0
+    max_attempts = 7
+    
+    # TODO: Create the main game loop
+    # Ask for guesses, give hints, count attempts
+    while attempts < max_attempts:
+        try:
+            guess = int(input(f"Attempt {attempts + 1}/{max_attempts}: Your guess: "))
+            attempts += 1
+            
+            if guess == secret_number:
+                print(f"🎉 Congratulations! You guessed it in {attempts} attempts!")
+                return True
+            elif guess < secret_number:
+                print("📈 Too low! Try a higher number.")
+            else:
+                print("📉 Too high! Try a lower number.")
+                
+        except ValueError:
+            print("❌ Please enter a valid number!")
+            attempts -= 1  # Don't count invalid attempts
+    
+    print(f"😞 Game over! The number was {secret_number}")
+    return False
+
+# Start the game
+number_guessing_game()
+`,
+    instructions: 'Create a complete number guessing game with hints, attempt counting, and win/lose conditions.',
+    tests: [
+      {
+        name: 'Game runs without errors',
+        input: null,
+        expected: true,
+        description: 'The game should run without crashing'
+      },
+      {
+        name: 'Uses random numbers',
+        input: null,
+        expected: true,
+        description: 'The game should use random.randint() for the secret number'
+      },
+      {
+        name: 'Has proper game loop',
+        input: null,
+        expected: true,
+        description: 'The game should use a while loop for the main game logic'
+      }
+    ],
+    hints: [
+      'Use random.randint(1, 100) to generate the secret number',
+      'Use a while loop to keep asking for guesses',
+      'Use if/elif/else to give hints about the guess'
+    ],
+    videoTutorial: 'https://www.youtube.com/watch?v=uzyiCpsS0qQ&list=PLnb0FwCbM-50UuNjpeIrdEnlSbbMK891Q',
+    additionalTutorials: [
+      'https://www.youtube.com/watch?v=bdUqQidffPE'
+    ],
+    codeWalkthrough: 'Step 1: Generate a random secret number\nStep 2: Create a while loop for the game\nStep 3: Get user input and validate it\nStep 4: Compare the guess with the secret number\nStep 5: Give hints and check for win/lose conditions',
+    whyThisWorks: 'Game development combines many programming concepts! You use random numbers, loops, conditionals, and user input to create an interactive experience.',
+    conceptGlossary: ['Game development', 'Random numbers', 'User input', 'Game loops', 'Interactive programming']
+  },
+
+  {
+    id: 'level22',
+    title: 'File Management System',
+    description: 'Learn to work with files and data storage',
+    difficulty: 4,
+    category: 'project',
+    starterCode: `# Create a simple file management system!
+# Learn to read, write, and organize files
+
+def create_student_report(student_name, subjects, grades):
+    # TODO: Create a formatted student report
+    # Format: "Student: [name]\\nSubject: [subject] - Grade: [grade]\\n..."
+    
+    report = f"Student: {student_name}\\n"
+    report += "=" * 30 + "\\n"
+    
+    for subject, grade in zip(subjects, grades):
+        report += f"Subject: {subject} - Grade: {grade}\\n"
+    
+    # Calculate average
+    if grades:
+        average = sum(grades) / len(grades)
+        report += f"\\nAverage Grade: {average:.1f}"
+    
+    return report
+
+def save_report_to_file(report, filename):
+    # TODO: Save the report to a file
+    # Use open() with 'w' mode to write the file
+    
+    with open(filename, 'w') as file:
+        file.write(report)
+    print(f"📁 Report saved to {filename}")
+
+# Test the system
+student_name = "Alice Johnson"
+subjects = ["Math", "Science", "English", "History"]
+grades = [95, 87, 92, 88]
+
+report = create_student_report(student_name, subjects, grades)
+print(report)
+print()
+
+save_report_to_file(report, "student_report.txt")
+`,
+    instructions: 'Create a student report system that formats data and saves it to a file.',
+    tests: [
+      {
+        name: 'Creates formatted report',
+        input: null,
+        expected: true,
+        description: 'The function should create a properly formatted report'
+      },
+      {
+        name: 'Calculates average grade',
+        input: null,
+        expected: true,
+        description: 'The function should calculate and display the average grade'
+      },
+      {
+        name: 'Saves to file',
+        input: null,
+        expected: true,
+        description: 'The function should save the report to a file'
+      }
+    ],
+    hints: [
+      'Use f-strings to format the report nicely',
+      'Use zip() to combine subjects and grades',
+      'Use open() with "w" mode to write files'
+    ],
+    videoTutorial: 'https://www.youtube.com/watch?v=uzyiCpsS0qQ&list=PLnb0FwCbM-50UuNjpeIrdEnlSbbMK891Q',
+    additionalTutorials: [
+      'https://www.youtube.com/watch?v=bdUqQidffPE'
+    ],
+    codeWalkthrough: 'Step 1: Create a formatted report string with student name\nStep 2: Use a loop to add each subject and grade\nStep 3: Calculate the average grade\nStep 4: Use open() with "w" mode to write the file\nStep 5: Use with statement for proper file handling',
+    whyThisWorks: 'File management is essential for storing data permanently. This is how programs save user data, reports, and other important information!',
+    conceptGlossary: ['File handling', 'Data storage', 'File I/O', 'String formatting', 'Data persistence']
+  },
+
+  {
+    id: 'level23',
+    title: 'API Integration',
+    description: 'Connect to external services and APIs',
+    difficulty: 5,
+    category: 'project',
+    starterCode: `# Learn to work with APIs (Application Programming Interfaces)!
+# APIs let your program talk to other services
+
+def get_weather_forecast(city):
+    # TODO: Simulate getting weather data from an API
+    # In real life, this would connect to a weather service
+    
+    # Simulated weather data (in real apps, this comes from an API)
+    weather_data = {
+        "New York": {"temp": 72, "condition": "Sunny", "humidity": 65},
+        "London": {"temp": 58, "condition": "Cloudy", "humidity": 80},
+        "Tokyo": {"temp": 75, "condition": "Rainy", "humidity": 90},
+        "Sydney": {"temp": 82, "condition": "Sunny", "humidity": 55}
+    }
+    
+    if city in weather_data:
+        data = weather_data[city]
+        print(f"🌤️ Weather in {city}:")
+        print(f"Temperature: {data['temp']}°F")
+        print(f"Condition: {data['condition']}")
+        print(f"Humidity: {data['humidity']}%")
+        return data
+    else:
+        print(f"❌ Weather data not available for {city}")
+        return None
+
+def get_multiple_cities(cities):
+    # TODO: Get weather for multiple cities
+    results = {}
+    for city in cities:
+        results[city] = get_weather_forecast(city)
+    return results
+
+# Test the API simulation
+cities = ["New York", "London", "Tokyo"]
+weather_results = get_multiple_cities(cities)
+`,
+    instructions: 'Create functions that simulate working with weather APIs to get data for multiple cities.',
+    tests: [
+      {
+        name: 'Gets weather for single city',
+        input: null,
+        expected: true,
+        description: 'The function should return weather data for a given city'
+      },
+      {
+        name: 'Handles multiple cities',
+        input: null,
+        expected: true,
+        description: 'The function should process multiple cities'
+      },
+      {
+        name: 'Handles unknown cities',
+        input: null,
+        expected: true,
+        description: 'The function should handle cities not in the database'
+      }
+    ],
+    hints: [
+      'Use a dictionary to store weather data for different cities',
+      'Use a for loop to process multiple cities',
+      'Use if/else to handle cities that exist or don\'t exist'
+    ],
+    videoTutorial: 'https://www.youtube.com/watch?v=uzyiCpsS0qQ&list=PLnb0FwCbM-50UuNjpeIrdEnlSbbMK891Q',
+    additionalTutorials: [
+      'https://www.youtube.com/watch?v=bdUqQidffPE'
+    ],
+    codeWalkthrough: 'Step 1: Create a dictionary with weather data for different cities\nStep 2: Check if the requested city exists in the data\nStep 3: Return the weather information in a nice format\nStep 4: Use a loop to process multiple cities\nStep 5: Store results in a dictionary for easy access',
+    whyThisWorks: 'APIs let your program connect to external services to get real-time data. This is how weather apps, social media, and many other apps work!',
+    conceptGlossary: ['API', 'External services', 'Data integration', 'Web services', 'Real-time data']
+  },
+
+  {
+    id: 'level24',
+    title: 'Database Operations',
+    description: 'Learn to work with databases and data storage',
+    difficulty: 5,
+    category: 'project',
+    starterCode: `# Learn database operations!
+# Work with data like a real database system
+
+class SimpleDatabase:
+    def __init__(self):
+        # TODO: Initialize the database with empty storage
+        self.data = {}
+    
+    def insert(self, table, record):
+        # TODO: Insert a new record into a table
+        # If table doesn't exist, create it
+        if table not in self.data:
+            self.data[table] = []
+        
+        self.data[table].append(record)
+        print(f"✅ Inserted record into {table}")
+    
+    def find(self, table, condition):
+        # TODO: Find records that match a condition
+        # Return all records where the condition is true
+        if table not in self.data:
+            return []
+        
+        results = []
+        for record in self.data[table]:
+            if condition(record):
+                results.append(record)
+        
+        return results
+    
+    def get_all(self, table):
+        # TODO: Get all records from a table
+        return self.data.get(table, [])
+
+# Test the database
+db = SimpleDatabase()
+
+# Insert some student records
+db.insert("students", {"name": "Alice", "age": 12, "grade": "A"})
+db.insert("students", {"name": "Bob", "age": 11, "grade": "B"})
+db.insert("students", {"name": "Charlie", "age": 13, "grade": "A"})
+
+# Find students with grade A
+grade_a_students = db.find("students", lambda student: student["grade"] == "A")
+print(f"Students with grade A: {grade_a_students}")
+
+# Get all students
+all_students = db.get_all("students")
+print(f"All students: {all_students}")
+`,
+    instructions: 'Create a simple database class that can insert, find, and retrieve data using conditions.',
+    tests: [
+      {
+        name: 'Inserts records correctly',
+        input: null,
+        expected: true,
+        description: 'The database should insert records into tables'
+      },
+      {
+        name: 'Finds records with conditions',
+        input: null,
+        expected: true,
+        description: 'The database should find records matching conditions'
+      },
+      {
+        name: 'Gets all records',
+        input: null,
+        expected: true,
+        description: 'The database should retrieve all records from a table'
+      }
+    ],
+    hints: [
+      'Use a dictionary to store tables and their records',
+      'Use lambda functions for conditions in the find method',
+      'Use list methods like append() to add records'
+    ],
+    videoTutorial: 'https://www.youtube.com/watch?v=uzyiCpsS0qQ&list=PLnb0FwCbM-50UuNjpeIrdEnlSbbMK891Q',
+    additionalTutorials: [
+      'https://www.youtube.com/watch?v=bdUqQidffPE'
+    ],
+    codeWalkthrough: 'Step 1: Create a class with a dictionary to store data\nStep 2: Implement insert() to add records to tables\nStep 3: Implement find() to search records with conditions\nStep 4: Implement get_all() to retrieve all records\nStep 5: Use lambda functions for flexible searching',
+    whyThisWorks: 'Databases are essential for storing and organizing large amounts of data. Even simple databases help you understand how data management works!',
+    conceptGlossary: ['Database', 'Data storage', 'Classes', 'Lambda functions', 'Data management']
+  },
+
+  {
+    id: 'level25',
+    title: 'Final Master Project',
+    description: 'Create your own complete Python application',
+    difficulty: 6,
+    category: 'project',
+    starterCode: `# 🎯 FINAL MASTER PROJECT 🎯
+# Create your own complete Python application!
+# Combine everything you've learned to build something amazing
+
+class StudentManager:
+    def __init__(self):
+        # TODO: Initialize your student management system
+        self.students = []
+        self.subjects = ["Math", "Science", "English", "History"]
+    
+    def add_student(self, name, age):
+        # TODO: Add a new student to the system
+        student = {
+            "name": name,
+            "age": age,
+            "grades": {},
+            "total_points": 0
+        }
+        self.students.append(student)
+        print(f"✅ Added student: {name}")
+    
+    def add_grade(self, student_name, subject, grade):
+        # TODO: Add a grade for a student in a specific subject
+        for student in self.students:
+            if student["name"] == student_name:
+                student["grades"][subject] = grade
+                student["total_points"] += grade
+                print(f"✅ Added {grade} for {student_name} in {subject}")
+                return True
+        print(f"❌ Student {student_name} not found")
+        return False
+    
+    def calculate_average(self, student_name):
+        # TODO: Calculate the average grade for a student
+        for student in self.students:
+            if student["name"] == student_name:
+                if student["grades"]:
+                    average = sum(student["grades"].values()) / len(student["grades"])
+                    return round(average, 2)
+                else:
+                    return 0
+        return None
+    
+    def get_class_report(self):
+        # TODO: Generate a complete class report
+        print("\\n📊 CLASS REPORT")
+        print("=" * 50)
+        
+        for student in self.students:
+            avg = self.calculate_average(student["name"])
+            print(f"\\nStudent: {student['name']} (Age: {student['age']})")
+            print(f"Average Grade: {avg}")
+            print("Grades:")
+            for subject, grade in student["grades"].items():
+                print(f"  {subject}: {grade}")
+    
+    def find_top_student(self):
+        # TODO: Find the student with the highest average
+        if not self.students:
+            return None
+        
+        top_student = None
+        top_average = 0
+        
+        for student in self.students:
+            avg = self.calculate_average(student["name"])
+            if avg > top_average:
+                top_average = avg
+                top_student = student["name"]
+        
+        return top_student, top_average
+
+# Test your complete application
+print("🎓 Welcome to the Student Management System!")
+manager = StudentManager()
+
+# Add some students
+manager.add_student("Alice", 12)
+manager.add_student("Bob", 11)
+manager.add_student("Charlie", 13)
+
+# Add some grades
+manager.add_grade("Alice", "Math", 95)
+manager.add_grade("Alice", "Science", 87)
+manager.add_grade("Bob", "Math", 78)
+manager.add_grade("Bob", "English", 92)
+manager.add_grade("Charlie", "Science", 96)
+manager.add_grade("Charlie", "History", 88)
+
+# Generate reports
+manager.get_class_report()
+
+# Find top student
+top_student, top_avg = manager.find_top_student()
+print(f"\\n🏆 Top Student: {top_student} with {top_avg} average")
+
+print("\\n🎉 Congratulations! You've built a complete Python application!")
+`,
+    instructions: 'Create a complete student management system that can add students, record grades, calculate averages, and generate reports.',
+    tests: [
+      {
+        name: 'Adds students correctly',
+        input: null,
+        expected: true,
+        description: 'The system should add students with names and ages'
+      },
+      {
+        name: 'Records grades properly',
+        input: null,
+        expected: true,
+        description: 'The system should record grades for different subjects'
+      },
+      {
+        name: 'Calculates averages',
+        input: null,
+        expected: true,
+        description: 'The system should calculate student averages correctly'
+      },
+      {
+        name: 'Generates reports',
+        input: null,
+        expected: true,
+        description: 'The system should generate comprehensive class reports'
+      },
+      {
+        name: 'Finds top student',
+        input: null,
+        expected: true,
+        description: 'The system should identify the student with the highest average'
+      }
+    ],
+    hints: [
+      'Use classes to organize your code',
+      'Use dictionaries to store student data',
+      'Use loops to process multiple students',
+      'Use functions to break down complex tasks'
+    ],
+    videoTutorial: 'https://www.youtube.com/watch?v=uzyiCpsS0qQ&list=PLnb0FwCbM-50UuNjpeIrdEnlSbbMK891Q',
+    additionalTutorials: [
+      'https://www.youtube.com/watch?v=bdUqQidffPE'
+    ],
+    codeWalkthrough: 'Step 1: Create a StudentManager class with data storage\nStep 2: Implement add_student() to add new students\nStep 3: Implement add_grade() to record grades\nStep 4: Implement calculate_average() for each student\nStep 5: Implement get_class_report() to display all data\nStep 6: Implement find_top_student() to identify the best performer',
+    whyThisWorks: 'This project combines everything you\'ve learned: classes, dictionaries, loops, functions, conditionals, and data processing. It\'s a real-world application that demonstrates your Python mastery!',
+    conceptGlossary: ['Classes', 'Object-oriented programming', 'Data management', 'Real-world applications', 'Complete systems']
   }
 ];

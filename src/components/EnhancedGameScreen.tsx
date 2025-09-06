@@ -1,16 +1,18 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
-import { ArrowLeft, Play, Lightbulb, RotateCcw, BookOpen, Video, HelpCircle } from 'lucide-react';
+import { ArrowLeft, Play, Lightbulb, RotateCcw, BookOpen, Video, HelpCircle, FileText } from 'lucide-react';
 import { CodeEditor } from './CodeEditor';
 import { Console } from './Console';
 import { GridView } from './GridView';
 import { HintSystem } from './HintSystem';
 import { ThemeToggle } from './ThemeToggle';
 import { SoundToggle } from './SoundToggle';
+import { MusicToggle } from './MusicToggle';
 import { AchievementModal } from './AchievementModal';
 import { CodeSnippetsPanel } from './CodeSnippetsPanel';
 import { ConceptGlossary } from './ConceptGlossary';
 import { ErrorTranslator } from './ErrorTranslator';
 import { VideoTutorial } from './VideoTutorial';
+import CodeReview from './CodeReview';
 import { levels } from '../data/levels';
 import { codeSnippets } from '../data/codeSnippets';
 import { conceptGlossary } from '../data/conceptGlossary';
@@ -32,6 +34,8 @@ interface EnhancedGameScreenProps {
   onThemeToggle: () => void;
   soundEnabled: boolean;
   onSoundToggle: () => void;
+  musicEnabled: boolean;
+  onMusicToggle: () => void;
 }
 
 export const EnhancedGameScreen: React.FC<EnhancedGameScreenProps> = ({ 
@@ -42,7 +46,9 @@ export const EnhancedGameScreen: React.FC<EnhancedGameScreenProps> = ({
   theme,
   onThemeToggle,
   soundEnabled,
-  onSoundToggle
+  onSoundToggle,
+  musicEnabled,
+  onMusicToggle
 }) => {
   const level = levels.find(l => l.id === levelId);
   const [code, setCode] = useState(level?.starterCode || '');
@@ -53,6 +59,7 @@ export const EnhancedGameScreen: React.FC<EnhancedGameScreenProps> = ({
   const [showGlossary, setShowGlossary] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
   const [showErrorTranslator, setShowErrorTranslator] = useState(false);
+  const [showCodeReview, setShowCodeReview] = useState(false);
   const [currentError, setCurrentError] = useState<string>('');
   const [unlockedAchievement, setUnlockedAchievement] = useState<Achievement | null>(null);
   const [hintState, setHintState] = useState<HintState>({
@@ -66,11 +73,12 @@ export const EnhancedGameScreen: React.FC<EnhancedGameScreenProps> = ({
 
   useEffect(() => {
     if (particleCanvasRef.current) {
-      particleService.initialize(particleCanvasRef.current);
+      particleService.init(particleCanvasRef.current);
+      particleService.start();
     }
     
     return () => {
-      particleService.destroy();
+      particleService.stop();
     };
   }, []);
 
@@ -124,7 +132,7 @@ export const EnhancedGameScreen: React.FC<EnhancedGameScreenProps> = ({
         // Create particle effect
         if (gameContainerRef.current) {
           const rect = gameContainerRef.current.getBoundingClientRect();
-          particleService.createSuccessEffect(rect.width / 2, rect.height / 2);
+          particleService.createSuccessParticles(rect.width / 2, rect.height / 2, 25);
         }
         
         const stars = result.stars || 1;
@@ -200,7 +208,7 @@ export const EnhancedGameScreen: React.FC<EnhancedGameScreenProps> = ({
           // Create achievement particle effect
           if (gameContainerRef.current) {
             const rect = gameContainerRef.current.getBoundingClientRect();
-            particleService.createAchievementEffect(rect.width / 2, rect.height / 2);
+            particleService.createAchievementParticles(rect.width / 2, rect.height / 2);
           }
           break; // Only show one achievement at a time
         }
@@ -238,7 +246,7 @@ export const EnhancedGameScreen: React.FC<EnhancedGameScreenProps> = ({
     // Create confetti effect
     if (gameContainerRef.current) {
       const rect = gameContainerRef.current.getBoundingClientRect();
-      particleService.createConfettiEffect(rect.width / 2, rect.height / 2);
+      particleService.createCelebrationParticles(rect.width / 2, rect.height / 2);
     }
     
     onComplete(levelId, executionResult?.stars || 1, hintState.currentHint);
@@ -276,6 +284,7 @@ export const EnhancedGameScreen: React.FC<EnhancedGameScreenProps> = ({
         <div className="game-controls">
           <ThemeToggle theme={theme} onToggle={onThemeToggle} />
           <SoundToggle soundEnabled={soundEnabled} onToggle={onSoundToggle} />
+          <MusicToggle musicEnabled={musicEnabled} onMusicToggle={onMusicToggle} />
           
           <button 
             className="btn btn-secondary"
@@ -348,6 +357,15 @@ export const EnhancedGameScreen: React.FC<EnhancedGameScreenProps> = ({
                 >
                   <Play className="btn-icon" />
                   {isRunning ? 'Running...' : 'Run Code'}
+                </button>
+                
+                <button 
+                  className="btn btn-secondary"
+                  onClick={() => setShowCodeReview(true)}
+                  disabled={isRunning}
+                >
+                  <FileText className="btn-icon" />
+                  Review Code
                 </button>
                 
                 {executionResult?.success && (
@@ -441,6 +459,18 @@ export const EnhancedGameScreen: React.FC<EnhancedGameScreenProps> = ({
         <AchievementModal 
           achievement={unlockedAchievement}
           onClose={() => setUnlockedAchievement(null)}
+        />
+      )}
+
+      {showCodeReview && (
+        <CodeReview 
+          code={code}
+          level={parseInt(levelId.replace('level-', ''))}
+          onClose={() => setShowCodeReview(false)}
+          onApplySuggestion={(suggestion) => {
+            setCode(prev => prev + '\n' + suggestion);
+            setShowCodeReview(false);
+          }}
         />
       )}
     </div>
