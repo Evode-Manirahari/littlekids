@@ -27,8 +27,7 @@ function AppRouter() {
 
   return (
     <div className="app">
-      <Router>
-        <Routes>
+      <Routes>
           <Route path="/" element={
             <WelcomeScreen 
               onStart={() => {
@@ -59,7 +58,6 @@ function AppRouter() {
           
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-      </Router>
 
       <AuthModal
         isOpen={showAuthModal}
@@ -180,7 +178,9 @@ function GameApp() {
 function App() {
   return (
     <LocalAuthProvider>
-      <AppRouter />
+      <Router>
+        <AppRouter />
+      </Router>
     </LocalAuthProvider>
   );
 }
