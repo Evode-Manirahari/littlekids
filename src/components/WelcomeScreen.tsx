@@ -176,12 +176,13 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onTeacher
           padding: 30px 20px;
           border: 2px solid transparent;
           transition: all 0.3s ease;
+          cursor: default;
         }
 
         .feature-card:hover {
-          border-color: #667eea;
-          transform: translateY(-5px);
-          box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2);
+          border-color: #e2e8f0;
+          transform: none;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .feature-icon {

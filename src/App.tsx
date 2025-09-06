@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { GameScreen } from './components/GameScreen';
 import { LevelSelect } from './components/LevelSelect';
 import { WelcomeScreen } from './components/WelcomeScreen';
@@ -14,6 +14,7 @@ function AppRouter() {
   const { user, profile, loading } = useLocalAuth();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
+  const navigate = useNavigate();
 
   if (loading) {
     return (
@@ -31,13 +32,16 @@ function AppRouter() {
           <Route path="/" element={
             <WelcomeScreen 
               onStart={() => {
+                console.log('Start button clicked, user:', user);
                 if (user) {
-                  window.location.href = '/game';
+                  console.log('Navigating to /game');
+                  navigate('/game');
                 } else {
+                  console.log('Opening auth modal');
                   setShowAuthModal(true);
                 }
               }}
-              onTeacherDashboard={() => window.location.href = '/teacher'}
+              onTeacherDashboard={() => navigate('/teacher')}
               user={user}
               profile={profile}
             />
@@ -70,6 +74,7 @@ function AppRouter() {
 // Game Application Component (for authenticated users)
 function GameApp() {
   const { user } = useLocalAuth();
+  const navigate = useNavigate();
   const [currentScreen, setCurrentScreen] = useState<'levelSelect' | 'game'>('levelSelect');
   const [currentLevelId, setCurrentLevelId] = useState<string>('');
   const [progress, setProgress] = useState<GameProgress>({
@@ -150,7 +155,7 @@ function GameApp() {
         <LevelSelect 
           progress={progress}
           onSelectLevel={startGame}
-          onBack={() => window.location.href = '/'}
+          onBack={() => navigate('/')}
           onReset={resetProgress}
         />
       )}
