@@ -53,11 +53,34 @@ sys.stderr = output_capture
       // Set up level-specific environment
       await this.setupLevelEnvironment(level);
       
-      // Execute student code
-      this.pyodide.runPython(code);
+      // Execute student code and capture output
+      let output = '';
+      try {
+        // Try to capture output from the execution
+        const result = this.pyodide.runPython(`
+import sys
+from io import StringIO
+import contextlib
+
+# Capture stdout
+old_stdout = sys.stdout
+sys.stdout = mystdout = StringIO()
+
+try:
+    exec("""${code.replace(/"/g, '\\"')}""")
+finally:
+    sys.stdout = old_stdout
+
+mystdout.getvalue()
+        `);
+        output = result || '';
+      } catch (error) {
+        console.log('Error capturing output:', error);
+        // Fallback to the original method
+        output = this.pyodide.runPython('output_capture.get_output()') || '';
+      }
       
-      // Get output
-      const output = this.pyodide.runPython('output_capture.get_output()');
+      console.log('Captured output:', output);
       
       // Run tests
       const testResults = await this.runTests(level);

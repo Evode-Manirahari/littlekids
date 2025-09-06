@@ -708,7 +708,22 @@ class OutputCapture:
 output_capture = OutputCapture()
 sys.stdout = output_capture
 sys.stderr = output_capture
-    `),this.initialized=!0,console.log("Pyodide initialized successfully"))}async executeCode(e,n){await this.initialize();try{this.pyodide.runPython("output_capture.output.clear()"),await this.setupLevelEnvironment(n),this.pyodide.runPython(e);const r=this.pyodide.runPython("output_capture.get_output()"),i=await this.runTests(n),s=this.calculateStars(i);return{success:!0,output:r,testResults:i,stars:s}}catch(r){return console.error("Code execution error:",r),{success:!1,output:"",error:r.message||"Unknown error occurred"}}}async setupLevelEnvironment(e){let n="";switch(e.category){case"loops":n=`
+    `),this.initialized=!0,console.log("Pyodide initialized successfully"))}async executeCode(e,n){await this.initialize();try{this.pyodide.runPython("output_capture.output.clear()"),await this.setupLevelEnvironment(n);let r="";try{r=this.pyodide.runPython(`
+import sys
+from io import StringIO
+import contextlib
+
+# Capture stdout
+old_stdout = sys.stdout
+sys.stdout = mystdout = StringIO()
+
+try:
+    exec("""${e.replace(/"/g,'\\"')}""")
+finally:
+    sys.stdout = old_stdout
+
+mystdout.getvalue()
+        `)||""}catch(o){console.log("Error capturing output:",o),r=this.pyodide.runPython("output_capture.get_output()")||""}console.log("Captured output:",r);const i=await this.runTests(n),s=this.calculateStars(i);return{success:!0,output:r,testResults:i,stars:s}}catch(r){return console.error("Code execution error:",r),{success:!1,output:"",error:r.message||"Unknown error occurred"}}}async setupLevelEnvironment(e){let n="";switch(e.category){case"loops":n=`
 import random
 
 def roller():
