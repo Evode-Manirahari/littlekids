@@ -30,7 +30,13 @@ function AppRouter() {
         <Routes>
           <Route path="/" element={
             <WelcomeScreen 
-              onStart={() => setShowAuthModal(true)}
+              onStart={() => {
+                if (user) {
+                  window.location.href = '/game';
+                } else {
+                  setShowAuthModal(true);
+                }
+              }}
               onTeacherDashboard={() => window.location.href = '/teacher'}
               user={user}
               profile={profile}

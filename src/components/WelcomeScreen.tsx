@@ -67,12 +67,21 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onTeacher
         <div className="welcome-actions">
           <button className="btn btn-primary btn-large" onClick={onStart}>
             <Play className="btn-icon" />
-            Start Coding!
+            {user ? 'Start Coding!' : 'Sign Up to Start!'}
           </button>
           
-          <button className="btn btn-secondary" onClick={() => {}}>
-            Reset Progress
-          </button>
+          {!user && (
+            <button className="btn btn-secondary" onClick={() => onStart()}>
+              <User className="btn-icon" />
+              Sign In
+            </button>
+          )}
+          
+          {user && (
+            <button className="btn btn-secondary" onClick={() => {}}>
+              Reset Progress
+            </button>
+          )}
         </div>
 
         <div className="welcome-footer">
