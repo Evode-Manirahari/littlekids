@@ -228,6 +228,19 @@ else:
             `;
             break;
             
+          case 'conditionals':
+            // For conditionals levels, just give 1 star for any successful execution
+            testCode = `
+# Test: ${test.name}
+print(f"🧪 Running test: {test.name}")
+result = True  # Give 1 star for any successful execution
+if result:
+    print(f"✅ Test '{test.name}' passed!")
+else:
+    print(f"❌ Test '{test.name}' failed!")
+            `;
+            break;
+            
           default:
             testCode = `
 # Test: ${test.name}

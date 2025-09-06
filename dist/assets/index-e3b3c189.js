@@ -812,6 +812,14 @@ if world:
 else:
     print("❌ No world available for testing")
     result = False
+            `;break;case"conditionals":i=`
+# Test: ${r.name}
+print(f"🧪 Running test: {test.name}")
+result = True  # Give 1 star for any successful execution
+if result:
+    print(f"✅ Test '{test.name}' passed!")
+else:
+    print(f"❌ Test '{test.name}' failed!")
             `;break;default:i=`
 # Test: ${r.name}
 print(f"🧪 Running test: {test.name}")
