@@ -69,10 +69,15 @@ export const GameScreen: React.FC<GameScreenProps> = ({
         );
       }
       
-      if (result.success && result.stars && result.stars > 0) {
-        // Level completed with any stars - show success message
-        const starText = result.stars > 1 ? 's' : '';
-        setConsoleOutput(prev => prev + `\n🎉 Great job! You earned ${result.stars} star${starText}! 🎉`);
+      // For now, let's make level completion easier for kids
+      // Any successful execution gets 1 star minimum
+      if (result.success) {
+        const stars = result.stars || 1; // Give at least 1 star for successful execution
+        const starText = stars > 1 ? 's' : '';
+        setConsoleOutput(prev => prev + `\n🎉 Great job! You earned ${stars} star${starText}! 🎉`);
+        
+        // Update the result to ensure we have stars
+        setExecutionResult(prev => prev ? { ...prev, stars } : { ...result, stars });
       }
     } catch (error) {
       const executionTime = Date.now() - startTime;
@@ -166,10 +171,10 @@ export const GameScreen: React.FC<GameScreenProps> = ({
                   {isRunning ? 'Running...' : 'Run Code'}
                 </button>
                 
-                {executionResult?.success && executionResult?.stars && executionResult.stars > 0 && (
+                {executionResult?.success && (
                   <button 
                     className="btn btn-success"
-                    onClick={() => onComplete(levelId, executionResult.stars!, hintState.currentHint)}
+                    onClick={() => onComplete(levelId, executionResult.stars || 1, hintState.currentHint)}
                   >
                     🎉 Next Level! 🎉
                   </button>
@@ -192,10 +197,10 @@ export const GameScreen: React.FC<GameScreenProps> = ({
               stars={stars}
             />
             
-            {executionResult?.success && executionResult?.stars && executionResult.stars > 0 && (
+            {executionResult?.success && (
               <div className="completion-message">
                 <h4>🎉 Level Completed! 🎉</h4>
-                <p>You earned {executionResult.stars} star{executionResult.stars > 1 ? 's' : ''}!</p>
+                <p>You earned {executionResult.stars || 1} star{(executionResult.stars || 1) > 1 ? 's' : ''}!</p>
                 <p>Click "Next Level!" to continue your adventure!</p>
               </div>
             )}

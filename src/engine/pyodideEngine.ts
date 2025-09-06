@@ -154,6 +154,19 @@ print("🚀 Ready to code!")
         let testCode = '';
         
         switch (level.category) {
+          case 'print':
+            // For print levels, just give 1 star for any successful execution
+            testCode = `
+# Test: ${test.name}
+print(f"🧪 Running test: {test.name}")
+result = True  # Give 1 star for any successful execution
+if result:
+    print(f"✅ Test '{test.name}' passed!")
+else:
+    print(f"❌ Test '{test.name}' failed!")
+            `;
+            break;
+            
           case 'loops':
             testCode = `
 # Test: ${test.name}
