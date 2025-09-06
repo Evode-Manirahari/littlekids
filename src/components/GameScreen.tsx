@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { ArrowLeft, Play, Lightbulb, Star, RotateCcw } from 'lucide-react';
+import { ArrowLeft, Play, Lightbulb, RotateCcw } from 'lucide-react';
 import { CodeEditor } from './CodeEditor';
 import { Console } from './Console';
 import { GridView } from './GridView';
@@ -19,7 +19,6 @@ interface GameScreenProps {
 
 export const GameScreen: React.FC<GameScreenProps> = ({ 
   levelId, 
-  progress, 
   onComplete, 
   onBack,
   progressService
@@ -111,8 +110,6 @@ export const GameScreen: React.FC<GameScreenProps> = ({
   };
 
   const stars = executionResult?.stars || 0;
-  const passedTests = executionResult?.testResults?.filter(t => t.passed).length || 0;
-  const totalTests = executionResult?.testResults?.length || 0;
 
   return (
     <div className="game-screen">
@@ -210,7 +207,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .game-screen {
           min-height: 100vh;
           background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);

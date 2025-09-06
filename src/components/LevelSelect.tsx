@@ -7,6 +7,7 @@ interface LevelSelectProps {
   progress: GameProgress;
   onSelectLevel: (levelId: string) => void;
   onBack: () => void;
+  onReset: () => void;
 }
 
 export const LevelSelect: React.FC<LevelSelectProps> = ({ progress, onSelectLevel, onBack }) => {
@@ -114,7 +115,7 @@ export const LevelSelect: React.FC<LevelSelectProps> = ({ progress, onSelectLeve
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .level-select {
           min-height: 100vh;
           padding: 20px;

@@ -171,7 +171,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, mode, onM
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .auth-modal-overlay {
           position: fixed;
           top: 0;

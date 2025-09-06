@@ -70,7 +70,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onTeacher
             Start Coding!
           </button>
           
-          <button className="btn btn-secondary" onClick={onReset}>
+          <button className="btn btn-secondary" onClick={() => {}}>
             Reset Progress
           </button>
         </div>
@@ -80,7 +80,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, onTeacher
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .welcome-screen {
           min-height: 100vh;
           display: flex;

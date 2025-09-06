@@ -84,7 +84,7 @@ export const Console: React.FC<ConsoleProps> = ({ output, isRunning, testResults
         )}
       </div>
 
-      <style jsx>{`
+      <style>{`
         .console {
           background: rgba(255, 255, 255, 0.95);
           border-radius: 15px;

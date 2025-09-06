@@ -25,7 +25,7 @@ export const GridView: React.FC<GridViewProps> = ({ world, moves }) => {
     }
   };
 
-  const getTileClass = (tileType: string, x: number, y: number) => {
+  const getTileClass = (x: number, y: number) => {
     let className = 'grid-tile';
     
     if (x === world.start[0] && y === world.start[1]) {
@@ -108,7 +108,7 @@ export const GridView: React.FC<GridViewProps> = ({ world, moves }) => {
         >
           {Array.from({ length: world.height }, (_, y) =>
             Array.from({ length: world.width }, (_, x) => {
-              const tileClass = getTileClass('', x, y);
+              const tileClass = getTileClass(x, y);
               const isRobotPath = robotPath.some(([px, py]) => px === x && py === y);
               const isRobotCurrent = robotPath.length > 0 && 
                 robotPath[robotPath.length - 1][0] === x && 
@@ -148,7 +148,7 @@ export const GridView: React.FC<GridViewProps> = ({ world, moves }) => {
         </div>
       )}
 
-      <style jsx>{`
+      <style>{`
         .grid-view {
           background: rgba(255, 255, 255, 0.95);
           border-radius: 15px;

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Users, BarChart3, BookOpen, Trophy, Clock, AlertCircle } from 'lucide-react';
+import { Users, BookOpen, Trophy, Clock, AlertCircle } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { ProgressService } from '../services/progressService';
 import { supabase } from '../lib/supabase';
-import type { Database } from '../lib/supabase';
 
 interface StudentProgress {
   student_id: string;
@@ -257,7 +256,7 @@ export const TeacherDashboard: React.FC = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .teacher-dashboard {
           min-height: 100vh;
           background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);

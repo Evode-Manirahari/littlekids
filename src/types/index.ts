@@ -26,7 +26,7 @@ export interface GridWorld {
   height: number;
   start: [number, number];
   goal: [number, number];
-  tiles: Tile[][];
+  tiles: Tile[];
 }
 
 export interface Tile {

@@ -54,7 +54,7 @@ export const HintSystem: React.FC<HintSystemProps> = ({ hintState, onGetHint }) 
         )}
       </div>
 
-      <style jsx>{`
+      <style>{`
         .hint-system {
           background: linear-gradient(135deg, #fff9e6 0%, #fef5e7 100%);
           border: 2px solid #f6e05e;

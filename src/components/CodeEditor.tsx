@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import Editor from '@monaco-editor/react';
 
 interface CodeEditorProps {
@@ -98,11 +98,11 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({ value, onChange, languag
           mouseWheelZoom: true,
           smoothScrolling: true,
           cursorBlinking: 'smooth',
-          cursorSmoothCaretAnimation: true
+          cursorSmoothCaretAnimation: 'on'
         }}
       />
       
-      <style jsx>{`
+      <style>{`
         .code-editor {
           border: 2px solid #e2e8f0;
           border-radius: 10px;

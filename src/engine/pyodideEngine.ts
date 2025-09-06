@@ -63,7 +63,7 @@ sys.stderr = output_capture
       const testResults = await this.runTests(level);
       
       // Calculate stars based on test results
-      const stars = this.calculateStars(testResults, level);
+      const stars = this.calculateStars(testResults);
       
       return {
         success: true,
@@ -246,7 +246,7 @@ result = True  # Placeholder for other test types
     return results;
   }
 
-  private calculateStars(testResults: TestResult[], level: Level): number {
+  private calculateStars(testResults: TestResult[]): number {
     const passedTests = testResults.filter(t => t.passed).length;
     const totalTests = testResults.length;
     
