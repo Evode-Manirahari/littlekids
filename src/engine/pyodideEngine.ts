@@ -252,7 +252,11 @@ else:
             break;
             
           case 'conditionals':
-            // For conditionals levels, just give 1 star for any successful execution
+          case 'strings':
+          case 'functions':
+          case 'lists':
+          case 'project':
+            // For all these categories, just give 1 star for any successful execution
             testCode = `
 # Test: ${test.name}
 print(f"🧪 Running test: {test.name}")

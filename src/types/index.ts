@@ -3,7 +3,7 @@ export interface Level {
   title: string;
   description: string;
   difficulty: number;
-  category: 'print' | 'loops' | 'conditionals' | 'functions' | 'lists' | 'dictionaries' | 'debugging' | 'project';
+  category: 'print' | 'loops' | 'conditionals' | 'functions' | 'lists' | 'strings' | 'dictionaries' | 'debugging' | 'project';
   starterCode: string;
   instructions: string;
   tests: TestCase[];
